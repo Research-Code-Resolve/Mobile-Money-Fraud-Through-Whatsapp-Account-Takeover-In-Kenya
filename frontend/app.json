@@ -4,31 +4,17 @@
     "slug": "guardpay",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "guardpay",
-    "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#1565C0"
-    },
-    "ios": {
-      "supportsTablet": false,
-      "bundleIdentifier": "com.guardpay.app"
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#1565C0"
-      },
-      "package": "com.guardpay.app"
-    },
-    "plugins": [
-      "expo-router",
-      "expo-font"
+    "userInterfaceStyle": "light",
+    "platforms": [
+      "android",
+      "web"
     ],
-    "experiments": {
-      "typedRoutes": true
-    }
+    "android": {
+      "package": "com.guardpay.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#1565C0"
+      }
+    },
+    "plugins": []
   }
 }
