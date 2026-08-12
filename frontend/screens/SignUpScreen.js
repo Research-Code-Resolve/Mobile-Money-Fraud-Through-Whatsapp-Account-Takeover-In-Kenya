@@ -58,46 +58,79 @@ export default function SignUpScreen({ navigation }) {
   };
 
   const validateInputs = () => {
+    console.log('=== VALIDATION START ===');
+    console.log('Full Name:', fullName, 'Length:', fullName.trim().length);
+    console.log('Phone Number:', phoneNumber);
+    console.log('Email:', email);
+    console.log('Password Length:', password.length);
+    console.log('Confirm Password Length:', confirmPassword.length);
+    console.log('Agree Terms:', agreeTerms);
+    
     if (!fullName.trim() || fullName.trim().length < 3) {
+      console.log('FAILED: Name validation');
       Alert.alert('Invalid Name', 'Please enter your full name (at least 3 characters)');
       return false;
     }
 
     const cleanPhone = phoneNumber.replace(/\D/g, '');
+    console.log('Clean Phone:', cleanPhone, 'Length:', cleanPhone.length);
+    
     if (!phoneNumber || cleanPhone.length !== 12) {
-      Alert.alert('Invalid Phone', 'Please enter a valid Kenyan phone number');
+      console.log('FAILED: Phone validation');
+      Alert.alert('Invalid Phone', `Please enter a valid Kenyan phone number.\n\nYou entered: ${cleanPhone}\nLength: ${cleanPhone.length} (need 12)`);
       return false;
     }
 
-    if (email && !validateEmail(email)) {
+    // Only validate email if it's not empty
+    if (email && email.trim() && !validateEmail(email)) {
+      console.log('FAILED: Email validation');
       Alert.alert('Invalid Email', 'Please enter a valid email address');
       return false;
     }
 
     if (!password || password.length < 6) {
+      console.log('FAILED: Password validation');
       Alert.alert('Weak Password', 'Password must be at least 6 characters long');
       return false;
     }
 
     if (password !== confirmPassword) {
+      console.log('FAILED: Password match validation');
       Alert.alert('Password Mismatch', 'Passwords do not match');
       return false;
     }
 
     if (!agreeTerms) {
+      console.log('FAILED: Terms validation');
       Alert.alert('Terms Required', 'Please agree to Terms of Service and Privacy Policy');
       return false;
     }
 
+    console.log('=== VALIDATION PASSED ===');
     return true;
   };
 
   const handleSignUp = async () => {
-    if (!validateInputs()) return;
+    console.log('Sign up button pressed');
+    console.log('Validating inputs...');
+    
+    if (!validateInputs()) {
+      console.log('Validation failed');
+      return;
+    }
 
+    console.log('Validation passed, starting signup...');
     setLoading(true);
+    
     try {
       const cleanPhone = phoneNumber.replace(/\D/g, '');
+      console.log('Signup data:', {
+        fullName: fullName.trim(),
+        phoneNumber: cleanPhone,
+        email: email.trim() || null,
+        hasPassword: !!password
+      });
+      
       const result = await authService.signUp({
         fullName: fullName.trim(),
         phoneNumber: cleanPhone,
@@ -105,16 +138,19 @@ export default function SignUpScreen({ navigation }) {
         password,
       });
 
+      console.log('Signup result:', result);
+
       if (result.success) {
         Alert.alert(
           'Account Created!',
           'Your account has been created successfully. Please login to continue.',
-          [{ text: 'OK', onPress: () => navigation.replace('Login') }]
+          [{ text: 'OK', onPress: () => navigation.navigate('Login') }]
         );
       } else {
         Alert.alert('Sign Up Failed', result.message || 'Could not create account');
       }
     } catch (error) {
+      console.error('Sign up error:', error);
       Alert.alert('Error', 'An error occurred. Please try again.');
     } finally {
       setLoading(false);
