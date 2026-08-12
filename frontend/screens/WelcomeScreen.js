@@ -28,10 +28,18 @@ export default function WelcomeScreen({ navigation }) {
 
         <TouchableOpacity
           style={styles.btn}
-          onPress={() => navigation.replace('Main')}
+          onPress={() => navigation.navigate('Login')}
           activeOpacity={0.85}
         >
           <Text style={styles.btnText}>Get Started</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity
+          style={styles.skipBtn}
+          onPress={() => navigation.replace('Main')}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.skipText}>Skip for now</Text>
         </TouchableOpacity>
       </SafeAreaView>
     </LinearGradient>
@@ -54,7 +62,11 @@ const styles = StyleSheet.create({
   btn: {
     backgroundColor: '#fff', width: '100%',
     paddingVertical: 16, borderRadius: 16,
-    alignItems: 'center',
+    alignItems: 'center', marginBottom: 12,
   },
   btnText: { color: '#1565C0', fontWeight: '700', fontSize: 18 },
+  skipBtn: {
+    paddingVertical: 12,
+  },
+  skipText: { color: 'rgba(255,255,255,0.8)', fontSize: 16 },
 });

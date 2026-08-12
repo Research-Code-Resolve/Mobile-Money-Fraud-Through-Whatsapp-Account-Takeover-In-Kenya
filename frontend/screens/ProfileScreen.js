@@ -4,6 +4,7 @@ import {
   Switch, SafeAreaView, Dimensions, Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import authService from '../services/authService';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const CARD_PADDING = 20;
@@ -333,13 +334,25 @@ export default function ProfileScreen({ navigation }) {
               icon="log-out" 
               label="Log Out" 
               danger 
-              onPress={() => {
+              onPress={async () => {
                 Alert.alert(
                   'Log Out',
                   'Are you sure you want to log out?',
                   [
                     { text: 'Cancel', style: 'cancel' },
-                    { text: 'Log Out', style: 'destructive', onPress: () => {} },
+                    { 
+                      text: 'Log Out', 
+                      style: 'destructive', 
+                      onPress: async () => {
+                        const result = await authService.logout();
+                        if (result.success) {
+                          navigation.reset({
+                            index: 0,
+                            routes: [{ name: 'Welcome' }],
+                          });
+                        }
+                      } 
+                    },
                   ]
                 );
               }} 

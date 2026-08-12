@@ -17,6 +17,10 @@ import TrustedContactsScreen from './screens/TrustedContactsScreen';
 import NumberCheckScreen from './screens/NumberCheckScreen';
 import MessageAnalyzerScreen from './screens/MessageAnalyzerScreen';
 import SafeWordScreen from './screens/SafeWordScreen';
+// Authentication
+import LoginScreen from './screens/LoginScreen';
+import SignUpScreen from './screens/SignUpScreen';
+import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
 // Community Features
 import ReportNumberScreen from './screens/ReportNumberScreen';
 import CommunityFeedScreen from './screens/CommunityFeedScreen';
@@ -78,7 +82,13 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
+          {/* Authentication */}
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+          {/* Main App */}
           <Stack.Screen name="Main" component={MainTabs} />
+          <Stack.Screen name="Dashboard" component={DashboardScreen} />
           <Stack.Screen name="TrustedContacts" component={TrustedContactsScreen} />
           <Stack.Screen name="NumberCheck" component={NumberCheckScreen} />
           <Stack.Screen name="MessageAnalyzer" component={MessageAnalyzerScreen} />
