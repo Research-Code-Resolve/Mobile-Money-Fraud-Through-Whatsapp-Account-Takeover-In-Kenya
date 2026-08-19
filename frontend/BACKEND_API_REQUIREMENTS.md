@@ -58,7 +58,7 @@ Register a new user
 {
   "phoneNumber": "+254712345678",
   "email": "user@example.com", // Optional
-  "name": "John Doe",
+  "name": "Anxious N.",
   "password": "SecurePass123!"
 }
 ```
@@ -71,7 +71,7 @@ Register a new user
     "user": {
       "id": "user_123abc",
       "phoneNumber": "+254712345678",
-      "name": "John Doe",
+      "name": "Precious K.",
       "email": "user@example.com",
       "createdAt": "2025-01-15T10:30:00Z"
     },
